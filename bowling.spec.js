@@ -1,10 +1,12 @@
-var Bowling = require('./bowling');
+const Bowling = require('./bowling');
 
 describe('Bowling', function () {
   describe('Check game can be scored correctly.', function () {
     it('should be able to score a game with all gutterballs', function () {
-      var rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      expect(new Bowling(rolls).score()).toEqual(0);
+      const rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const game = new Bowling(rolls);
+
+      expect(game.score()).toEqual(0);
     });
 
     xit('should be able to score a game with all open frames', function () {
@@ -71,6 +73,8 @@ describe('Bowling', function () {
       var rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
       expect(new Bowling(rolls).score()).toEqual(300);
     });
+
+
   });
 
   describe('Check game rules.', function () {
@@ -145,4 +149,6 @@ describe('Bowling', function () {
         new Error('Score cannot be taken until the end of the game'));
     });
   });
+
+
 });

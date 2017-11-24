@@ -1,12 +1,11 @@
-// roll(pins)
-// {
-// 	return pins;
-// }
+class Game {
+	constructor(rolls) {
+	    this.rolls = rolls;
+  	}
 
-
-function score()
-{
-	return 0;
+	score(){
+		return 0;
+	}
 }
 
-module.exports = {score};
+module.exports = Game;
