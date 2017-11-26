@@ -1,5 +1,4 @@
 const Frame = require('./frame');
-const FillBall = require('./fillBall');
 
 class Game {
 	constructor(rolls) {
@@ -9,15 +8,15 @@ class Game {
 	score(){
 
 		var frames = getFrames(this.rolls);
-		var fillBall = getFillBall(this.rolls);
 
-		// var total = 0;
+		var simpleTotal = getSimpleTotal(frames);
 
-		// for (var i=0; i<10; i++){
-		// 	total = total + frames[i].total;
-		// }
+		var spareBonus = accountForSpares(frames);
+		
+		displayResults(this.rolls, simpleTotal, spareBonus);
+		return simpleTotal + spareBonus;
 
-		return total;
+		// return simpleTotal;
 	}
 }
 
@@ -25,22 +24,60 @@ module.exports = Game;
 
 
 function getFrames(rolls){
+	//only gets 10 frames
+	//ignores fillBall scenario
 	const frames = [];
 
-		for (var i=0; i<20; i+=2){
-			var frame = new Frame(rolls[i],rolls[i+1]);
-			frames.push(frame);
+		var i = 0 ;
+
+		while(i < 9){
+
+			for (var j=0; j<20; j+=2){
+				if(rolls[j]==10){
+					frames.push(new Frame(10,0));
+					i++;
+				}
+				else{
+					frames.push(new Frame(rolls[j],rolls[j+1]));
+					i++;
+				}
+			}
 		}
+
 	return frames;
 }
 
-function getFillBall(rolls){
-	if (rolls.length > 20) {
-			var fillBall = new FillBall(this.rolls[20]);
+function getSimpleTotal(frames){
+	var total = 0;
+
+		for(var i=0; i<frames.length; i++){
+
+			total = total + frames[i].total;
 		}
-	else{
-			var fillBall = new FillBall(0);
-	}
-	console.log(fillBall);
-	return fillBall;
+
+		return total;
 }
+
+function accountForSpares(frames){
+	//only checks first 9 frames
+	//ignores fillBall scenario
+
+	var spareBonus = 0;
+
+	for(var i=0; i<9; i++){
+		if(frames[i].roll1 + frames[i].roll2 === 10){
+			spareBonus = frames[i+1].roll1;
+		}
+	}
+
+	return spareBonus;
+}
+
+function displayResults(rolls,simpleTotal,spareBonus){
+	console.log(
+		'Rolls: \t'+ rolls + 
+		'\nSimple Total: \t' + simpleTotal +
+		'\nSpare Bonus: \t' + spareBonus);
+}
+
+

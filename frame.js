@@ -13,6 +13,11 @@ class Frame {
   		return this.roll1 + this.roll2 === 10;
   	}
 
+    update(points){
+      this.total = this.total + points;
+      return this.total;
+    }
+
 
 }
 
