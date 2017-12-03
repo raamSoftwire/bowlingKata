@@ -1,8 +1,8 @@
-const Bowling = require('./bowling');
+const Game = require('./game');
 
 var rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 1];
 
-var game = new Bowling(rolls);
+var game = new Game(rolls);
 
 game.displayFrames();
 

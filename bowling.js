@@ -1,9 +1,10 @@
-const Frame = require('./frame');
+const ScoreCard = require('./scoreCard');
 
 class Game {
 	constructor(rolls) {
 	    this.rolls = rolls;
 	    this.frames = getFrames(rolls);
+	   
   	}
 
   	displayResults(){
@@ -33,49 +34,24 @@ class Game {
 module.exports = Game;
 
 
-function getFrames(rolls){
 
+
+function getFrames2(rolls){
 	var frames = [];
+	var ballNo = 0;
 
-	for(var i = 0; i<rolls.length; i++){
+	while(frames.length<10){//gives first 9 frames, deal with 10th separately
 
-		if(rolls[i] === 10){
-			if(frames.length === 8){
-				frames.push(new Frame(10,0));
-				frames.push(new Frame(rolls[i+1],0));
-				// console.log('clause 1');
-				break;
-				
-			} 
-			else{
-				frames.push(new Frame(10,0));
-				// console.log('clause 2');
-			}
+		if(rolls[ballNo] === 10){
+			frames.push(new Frame(10,0));
+			ballNo++;
 		}
-		else{
-			if(frames.length === 9 && rolls[i]+rolls[i+1] === 10){
-				frames.push(new Frame (rolls[i],rolls[i+1]));
-				frames.push(new Frame (rolls[i+2],0));
-				// console.log('clause 3');
-				break;
-				
-			}
-			else{
-				frames.push(new Frame(rolls[i],rolls[i+1]));
-				i++;
-				// console.log('clause 4');
-			}
+
+		else {
+			frames.push(new Frame(rolls[ballNo],rolls[ballNo + 1]));
+			ballNo += 2;
 		}
 	}
-
-	if(frames.length === 12){
-			frames.pop();
-		}
-
-	if(frames.length === 11){
-		frames[10].roll2 = 0;
-	}
-
 	return frames;
 }
 
