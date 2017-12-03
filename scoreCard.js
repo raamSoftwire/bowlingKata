@@ -8,20 +8,23 @@ class ScoreCard {
   	}
 
   	score(){
-  		// var simpleTotal = getSimpleTotal(this.frames);
+  		var simpleTotal = getSimpleTotal(this.frames) + this.finalFrame.total
+
 		// var spareBonus = accountForSpares(this.frames);
 		// var strikeBonus = accountForStrikes(this.frames);
-		// return simpleTotal + spareBonus+ strikeBonus;
+
+		return simpleTotal; //+ spareBonus+ strikeBonus;
   	}
 
 }
 
 module.exports = ScoreCard;
 
+
 function getSimpleTotal(frames){
 	var total = 0;
 
-	for(var i=0; i<frames.length; i++){
+	for(var i=0; i<9; i++){//only first 9 frames
 
 		total += frames[i].total;
 	}

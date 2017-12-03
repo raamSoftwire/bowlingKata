@@ -1,5 +1,5 @@
 class FinalFrame {
-	constructor(roll1, roll2,roll3) {
+	constructor(roll1, roll2, roll3) {
 	    this.roll1 = roll1;
 	    this.roll2 = roll2;
 	    
@@ -10,7 +10,7 @@ class FinalFrame {
 			this.roll3 = 0;
 		}
 
-		this.total = roll1 + roll2 + roll3;
+		this.total = roll1 + roll2 + this.roll3;
   	}
 }
 
